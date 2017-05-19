@@ -1,0 +1,527 @@
+<br>
+
+<div class="container" style="margin-left: 30px; margin-right: 30px">
+    <!--<form>-->
+    <md-card>
+        <h3>ข้อมูลแรกรับผู้สูงอายุ</h3>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="content">
+            <div fxFlex="1"></div>
+            <div fxFlex>
+                <md-input-container style="width: 100%">
+                    <input type="text" maxlength="13" mdInput placeholder="เลขประจำตัวประชาชน" value="" [(ngModel)]="data.idNumber" (keyup)="test(data.idNumber)">
+                </md-input-container>
+            </div>
+            <div fxFlex>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center stretch" fxLayoutGap="10px" class="content">
+            <div fxFlex="1"></div>
+            <div fxFlex="9">
+                <md-select [(ngModel)]="data.title" placeholder="คำนำหน้า" style="width: 100%; margin-top: 9px; min-width: 0px;">
+                    <md-option *ngFor="let title of titles" [value]="title.code">
+                        {{ title.desc }}
+                    </md-option>
+                </md-select>
+            </div>
+            <div fxFlex="40">
+                <md-input-container style="width: 100%">
+                    <input [(ngModel)]="data.firstName" mdInput placeholder="ชื่อ" value="">
+                </md-input-container>
+            </div>
+            <div fxFlex="40">
+                <md-input-container style="width: 100%">
+                    <input [(ngModel)]="data.lastName" mdInput placeholder="นามสกุล" value="">
+                </md-input-container>
+            </div>
+            <div fxFlex="9">
+                <md-input-container style="width: 80%">
+                    <input [(ngModel)]="data.age" mdInput placeholder="อายุ" type="text" maxlength="3">
+                </md-input-container>ปี
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center stretch" fxLayoutGap="10px" class="content">
+            <div fxFlex="1"></div>
+            <div fxFlex="49">
+                <md-input-container style="width: 100%">
+                    <input [(ngModel)]="data.acceptDate" type="date" format="dd/mm/yyyy" mdInput placeholder="รับเมื่อ (วัน/เดือน/ปี)" value="">
+                </md-input-container>
+            </div>
+            <div fxFlex="49">
+                <md-input-container style="width: 100%">
+                    <input [(ngModel)]="data.acceptTime" mdInput type="time" placeholder="เวลา" value="">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center stretch" fxLayoutGap="10px" class="content">
+            <div fxFlex="1"></div>
+            <div fxFlex>
+                <section class="example-section">
+                    <label>เข้าพักเรือนนอน:</label>
+                    <md-radio-group [(ngModel)]="data.home">
+                        <md-radio-button value="บ้านช้องนาง">บ้านช้องนาง</md-radio-button>&nbsp;&nbsp;
+                        <md-radio-button value="บ้านชงโค">บ้านชงโค</md-radio-button>&nbsp;&nbsp;
+                        <md-radio-button value="บ้านช่อชบา">บ้านช่อชบา</md-radio-button>&nbsp;&nbsp;
+                        <md-radio-button value="บ้านชมนาด">บ้านชมนาด</md-radio-button>&nbsp;&nbsp;
+                        <md-radio-button value="บ้านลีลาวดี">บ้านลีลาวดี</md-radio-button>&nbsp;&nbsp;
+                        <md-radio-button value="other">อื่นๆ (ระบุ)</md-radio-button>&nbsp;&nbsp;
+                    </md-radio-group>
+                    <md-input-container>
+                        <input mdInput placeholder="" [(ngModel)]="data.homeOther" [disabled]="home != 'other'">
+                    </md-input-container>
+                </section>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+
+        <label>ผู้นำส่ง</label>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="content">
+            <div fxFlex="1"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isRelativeSent">ญาติโดย </md-checkbox>
+                <md-select [(ngModel)]="relativeTitle" placeholder="คำนำหน้า" style="margin-top: 9px;" [disabled]="!isRelativeSent">
+                    <md-option *ngFor="let title of titles" [value]="title.code">
+                        {{ title.desc }}
+                    </md-option>
+                </md-select>&nbsp;&nbsp;
+                <md-input-container>
+                    <input mdInput placeholder="ชื่อ" [(ngModel)]="relativeFirstName" [disabled]="!isRelativeSent">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container>
+                    <input mdInput placeholder="นามสกุล" [(ngModel)]="relativeLastName" [disabled]="!isRelativeSent">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container>
+                    <input size="60" mdInput placeholder="ที่อยู่ที่สมารถติดต่อได้" [(ngModel)]="relativeAddress" [disabled]="!isRelativeSent">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container>
+                    <input mdInput placeholder="มีความเกี่ยวข้องเป็น" [(ngModel)]="relativeRelation" [disabled]="!isRelativeSent">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container>
+                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="relativeTel" maxlength="10" [disabled]="!isRelativeSent">
+                </md-input-container>&nbsp;&nbsp;
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="content">
+            <div fxFlex="1"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isOrganizationSent">หน่วยงาน/องค์กร </md-checkbox>
+                <md-input-container>
+                    <input size="50" mdInput placeholder="ชื่อหน่วยงาน" [(ngModel)]="organizationName" [disabled]="!isOrganizationSent">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container>
+                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="organizationTel" [disabled]="!isOrganizationSent">
+                </md-input-container>&nbsp;&nbsp;
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <h3>ข้อมูลเบื้องต้นของผู้สูงอายุ</h3>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">เพศ</div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="gender">
+                    <md-radio-button value="male">ชาย</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="female">หญิง</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">เชื้อชาติ</div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="ethnicity">
+                    <md-radio-button value="ไทย">ไทย</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="จีน">จีน</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="other">อื่นๆ (ระบุ)</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="ethnicityOther" [disabled]="ethnicity != 'other'">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <!--<br>-->
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">ศาสนา</div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="religion">
+                    <md-radio-button value="พุทธ">พุทธ</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="คลิสต์">คลิสต์</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="อิสลาม">อิสลาม</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="other">อื่นๆ (ระบุ)</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="religionOther" [disabled]="religion != 'other'">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">สถานภาพ</div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="status">
+                    <md-radio-button value="โสด">โสด</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="สมรส">สมรส</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="อย่าร้าง">อย่าร้าง</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="แยกกันอยู่">แยกกันอยู่</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="คู่สมรสเสียชีวิต">คู่สมรสเสียชีวิต</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ไม่มีข้อมูล">ไม่มีข้อมูล</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">การศึกษา</div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="education">
+                    <md-radio-button value="ไม่ได้รับการศึกษา">ไม่ได้รับการศึกษา</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ประถมศึกษาตอนต้น">ประถมศึกษาตอนต้น</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ประถมศึกษาตอนปลาย">ประถมศึกษาตอนปลาย</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="มัธยมศึกษาตอนต้น">มัธยมศึกษาตอนต้น</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="มัธยมศึกษาตอนปลาย">มัธยมศึกษาตอนปลาย</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ปวช">ปวช/เทียบเท่า</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ปวส">ปวส/เทียบเท่า</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="อนุปริญญา">อนุปริญญา</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ปริญญาตรี">ปริญญาตรี</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="สูงกว่าปริญญาตรี">สูงกว่าปริญญาตรี</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="other">ไม่มีข้อมูล</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">อาชีพ</div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="career">
+                    <md-radio-button value="รับราชการ/พนักงานรัฐวิสาหกิจ">รับราชการ/พนักงานรัฐวิสาหกิจ</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="รับจ้าง/ลูกจ้าง">รับจ้าง/ลูกจ้าง</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ธุรกิจ/ค้าขาย">ธุรกิจ/ค้าขาย</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="เกษตรกรรม/ประมง">เกษตรกรรม/ประมง</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ไม่ได้ประกอบอาชีพ">ไม่ได้ประกอบอาชีพ</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="other">อื่นๆ (ระบุ)</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="careerOther" [disabled]="career != 'other'">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">รายได้ต่อเดือน</div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="salary">
+                    <md-radio-button value="ต่ำกว่า ๑,๕๐๐ บาท">ต่ำกว่า ๑,๕๐๐ บาท</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="๑,๕๐๐ - ๕,๐๐๐ บาท">๑,๕๐๐ - ๕,๐๐๐ บาท</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="๕,๐๐๑ - ๑๐,๐๐๐ บาท">๕,๐๐๑ - ๑๐,๐๐๐ บาท</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="๑๐,๐๐๑ - ๒๐,๐๐๐ บาท">๑๐,๐๐๑ - ๒๐,๐๐๐ บาท</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="มากกว่า ๒๐,๐๐๐ บาท">มากกว่า ๒๐,๐๐๐ บาท</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ไม่มีข้อมูล">ไม่มีข้อมูล</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">สิทธิด้านการรักษาพยาบาล</div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="medicalPrivilege">
+                    <md-radio-button value="ข้าราชการ/เบิกได้">ข้าราชการ/เบิกได้</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ประกันสังคม">ประกันสังคม</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="บัตรประกันสุขภาพถ้วนหน้า เลขที่">บัตรประกันสุขภาพถ้วนหน้า เลขที่</md-radio-button>
+                    <md-input-container style="margin-top: -10px;">
+                        <input mdInput placeholder="" [(ngModel)]="universalHealthInsuranceCardNo" [disabled]="medicalPrivilege != 'บัตรประกันสุขภาพถ้วนหน้า เลขที่'">
+                    </md-input-container>&nbsp;&nbsp;
+                    <md-radio-button value="ไม่มีข้อมูล">ไม่มีข้อมูล</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13">ภูมิลำนำเดิม</div>
+            <div fxFlex>
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="เลขที่" [(ngModel)]="oldAddress.no">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="หมู่ที่" [(ngModel)]="oldAddress.moo">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="ตรอก/ซอย" [(ngModel)]="oldAddress.soi">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="ถนน" [(ngModel)]="oldAddress.road">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="ตำบล" [(ngModel)]="oldAddress.subDistrict">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="อำเภอ" [(ngModel)]="oldAddress.district">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="จังหวัด" [(ngModel)]="oldAddress.province">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="รหัสไปรษณีย์" [(ngModel)]="oldAddress.zipcode">
+                </md-input-container>&nbsp;&nbsp;
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex>ที่อยู่ปัจจุบัน&nbsp;&nbsp;&nbsp;&nbsp;
+                <md-checkbox [(ngModel)]="isUserSameOldAddress" (change)="userSameOldAddress(isUserSameOldAddress)">ใช้ที่อยู่เดียวกับ ภูมิลำนำเดิม</md-checkbox>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="เลขที่" [(ngModel)]="currentAddress.no">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="หมู่ที่" [(ngModel)]="currentAddress.moo">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="ตรอก/ซอย" [(ngModel)]="currentAddress.soi">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="ถนน" [(ngModel)]="currentAddress.road">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="ตำบล" [(ngModel)]="currentAddress.subDistrict">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="อำเภอ" [(ngModel)]="currentAddress.district">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="จังหวัด" [(ngModel)]="currentAddress.province">
+                </md-input-container>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="รหัสไปรษณีย์" [(ngModel)]="currentAddress.zipcode">
+                </md-input-container>&nbsp;&nbsp;
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex>บุคลิกลักษณทั่วไป (ตอบได้มากกว่า 1 ข้อ)
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserFacePersonality" (change)="userSameOldAddress(isUserSameOldAddress)">ใบหน้า (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.face" [disabled]="!isUserFacePersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserSkinPersonality" (change)="userSameOldAddress(isUserSameOldAddress)">สีผิว (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.skin" [disabled]="!isUserSkinPersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserBodyPersonality" (change)="userSameOldAddress(isUserSameOldAddress)">สภาพร่างกาย (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.body" [disabled]="!isUserBodyPersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserMolePersonality" (change)="userSameOldAddress(isUserSameOldAddress)">ตำหนิเป็นไฝ (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.mole" [disabled]="!isUserMolePersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserStigmaPersonality" (change)="userSameOldAddress(isUserSameOldAddress)">ตำหนิเป็นปาน (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.stigma" [disabled]="!isUserStigmaPersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserTattooPersonality" (change)="userSameOldAddress(isUserSameOldAddress)">ตำหนิเป็นรอยสัก (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.tattoo" [disabled]="!isUserTattooPersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserScarPersonality" (change)="userSameOldAddress(isUserSameOldAddress)">ตำหนิเป็นแผลเป็น (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.scar" [disabled]="!isUserScarPersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserSpeakPersonality" (change)="userSameOldAddress(isUserSameOldAddress)">การพูดจาตอบโต้ (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.speak" [disabled]="!isUserSpeakPersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isUserStancePersonality" (change)="userSameOldAddress(isUserSameOldAddress)">ท่าทาง (ระบุ)</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input mdInput placeholder="" [(ngModel)]="personality.stance" [disabled]="!isUserStancePersonality">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-input-container style="margin-top: -10px; width: 100%">
+                    <input mdInput placeholder="กรณีที่มีลักษณะความพิการซ้ำซ้อน (ระบุลักษณะความพิการ)" [(ngModel)]="personality.handicap">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex>
+                ความสามารถในการช่วยเหลือตนเอง
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-radio-group [(ngModel)]="selfHelp">
+                    <md-radio-button value="ดีมาก">ดีมาก</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ดี">ดี</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ปานกลาง">ปานกลาง</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="พอใช้">พอใช้</md-radio-button>&nbsp;&nbsp;
+                    <md-radio-button value="ช่วยเหลือตนเองไม่ได้">ช่วยเหลือตนเองไม่ได้</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex>
+                สภาพปัญหา
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex="42">
+                <md-checkbox [(ngModel)]="issue01">ฐานะยากจน</md-checkbox>
+            </div>
+            <div fxFlex="42">
+                <md-checkbox [(ngModel)]="issue02">ไม่มีที่อยู่อาศัย</md-checkbox>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex="42">
+                <md-checkbox [(ngModel)]="issue03">ขาดผู้อุปการดูแล</md-checkbox>
+            </div>
+            <div fxFlex="42">
+                <md-checkbox [(ngModel)]="issue04">ไม่มีงานทำ/ไม่มีอาชีพ</md-checkbox>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex="42">
+                <md-checkbox [(ngModel)]="issue05">อยู่กับครอบครัวไม่มีความสุข</md-checkbox>
+            </div>
+            <div fxFlex="42">
+                <md-checkbox [(ngModel)]="issue06">ต้องการอยู่อย่างอิสระ</md-checkbox>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="1"></div>
+            <div fxFlex="13"></div>
+            <div fxFlex>
+                <md-checkbox [(ngModel)]="isOtherIssue" (change)="userSameOldAddress(isUserSameOldAddress)">อื่นๆ</md-checkbox>&nbsp;&nbsp;
+                <md-input-container style="margin-top: -10px;">
+                    <input size="80" mdInput placeholder="" [(ngModel)]="otherIssue" [disabled]="!isOtherIssue">
+                </md-input-container>
+            </div>
+            <div fxFlex="1"></div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayoutAlign="center stretch" fxLayoutGap="10px">
+            <button md-button (click)="addNewUser()" class="btn-default">ยืนยัน</button>
+            <button md-button (click)="getUser()" class="btn-delete">ยกเลิก</button>
+        </div>
+    </md-card>
+    <!--</form>-->
+</div>

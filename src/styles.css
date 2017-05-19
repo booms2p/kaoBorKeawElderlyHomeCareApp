@@ -1,1 +1,85 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/*@import '@angular/material/core/theming/prebuilt/deeppurple-amber.css';*/
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+/*@import '~primeng/resources/themes/omega/theme.css';*/
+
+.mat-select-trigger {
+    min-width: 0px !important;
+}
+
+.btn-default {
+    box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.26), 0 1px 5px 0 rgba(0, 0, 0, 0.16) !important;
+    transition: all 0.5s ease-in-out !important;
+    background-color: #fff !important;
+    color: #0073ea !important;
+    border-color: #fff !important;
+}
+
+.btn-default:hover {
+    transition: all 0.5s ease-in-out !important;
+    background-color: #0073ea !important;
+    color: #fff !important;
+    border-color: #0073ea !important;
+}
+
+.btn-default:focus {
+    border-color: #0073ea !important;
+}
+
+.btn-edit {
+    box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.26), 0 1px 5px 0 rgba(0, 0, 0, 0.16) !important;
+    transition: all 0.5s ease-in-out !important;
+    background-color: #fff !important;
+    color: #f0ad4e !important;
+    border-color: #fff !important;
+}
+
+.btn-edit:hover {
+    transition: all 0.5s ease-in-out !important;
+    background-color: #f0ad4e !important;
+    color: #fff !important;
+    border-color: #f0ad4e !important;
+}
+
+.btn-edit:focus {
+    border-color: #f0ad4e !important;
+}
+
+.btn-delete {
+    box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.26), 0 1px 1px 0 rgba(0, 0, 0, 0.16) !important;
+    transition: all 0.5s ease-in-out !important;
+    background-color: #fff !important;
+    color: #d9534f !important;
+    border-color: #fff !important;
+}
+
+.btn-delete:hover {
+    transition: all 0.5s ease-in-out !important;
+    background-color: #d9534f !important;
+    color: #fff !important;
+    border-color: #d9534f !important;
+}
+
+.btn-delete:focus {
+    border-color: #d9534f !important;
+}
+
+.btn-search:active,
+.btn-edit:active,
+.btn-delete:active {
+    transition: all 0.5s ease-in-out !important;
+    background-color: #fff !important;
+    color: #ff0093 !important;
+    border-color: #dddddd !important;
+}
+
+.ui-state-active {
+    border-color: #dddddd;
+    background: #ffffff;
+    color: #ff0084;
+    border-radius: 50%;
+}
