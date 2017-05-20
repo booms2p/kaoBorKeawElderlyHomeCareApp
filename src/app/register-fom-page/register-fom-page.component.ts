@@ -17,7 +17,7 @@ export class RegisterFomPageComponent implements OnInit {
     'title': '',
     'firstName': '',
     'lastName': '',
-    'age': 0,
+    'age': '',
     'acceptDate': '',
     'acceptTime': '',
     'homeName': '',
@@ -47,46 +47,40 @@ export class RegisterFomPageComponent implements OnInit {
         'selfHelp': '',
         'issue': []
     },
-    'address': [
-        {
-            'oldAddress': 
-              {
-                'no': 0,
-                'moo': 0,
+    'address': {
+            'oldAddress': {
+                'no': '',
+                'moo': '',
                 'soi': '',
                 'road': '',
                 'subDistrict': '',
                 'district': '',
                 'province': '',
                 'zipCode': ''
-              }
-        },
-        {
-            'currentAddress': 
-              {
-                'no': 0,
-                'moo': 0,
+                
+            },
+            'currentAddress': {
+                'no': '',
+                'moo': '',
                 'soi': '',
                 'road': '',
                 'subDistrict': '',
                 'district': '',
                 'province': '',
                 'zipCode': ''
-              }
-        }
-    ]
-
+            }
+    }
   };
 
   oldAddress = {'no': '','moo': '','soi': '','road': '','subDistrict': '','district': '','province': '','zipcode': ''};
   currentAddress = {'no': '','moo': '','soi': '','road': '','subDistrict': '','district': '','province': '','zipcode': ''};
-  personality = {'face': '', 'skin': '', 'body': '', 'mole': '', 'stigma': '', 'tattoo': '', 'scar': '', 'speak': '', 'stance': '', 'handicap': ''}
+  personality = {'face': '', 'skin': '', 'body': '', 'mole': '', 'stigma': '', 'tattoo': '', 'scar': '', 'speak': '', 'stance': '', 'handicap': ''};
+  
   titles = [
     {'code': 'Mr','desc': 'นาย'},
     {'code': 'Ms','desc': 'นาง'},
     {'code': 'Mrs','desc': 'นางสาว'}
   ];
-  gender = '';
 
   dataForSubmit = {};
 
@@ -105,9 +99,9 @@ export class RegisterFomPageComponent implements OnInit {
 
   userSameOldAddress (isUserSameOldAddress) {
     if (isUserSameOldAddress) {
-        this.currentAddress = Object.assign({}, this.oldAddress)
+        this.data.address.currentAddress = Object.assign({}, this.data.address.oldAddress)
     } else {
-        this.currentAddress = {'no': '','moo': '','soi': '','road': '','subDistrict': '','district': '','province': '','zipcode': ''};
+        this.data.address.currentAddress = {'no': '','moo': '','soi': '','road': '','subDistrict': '','district': '','province': '','zipCode': ''};
     };
   };
 
@@ -132,57 +126,57 @@ export class RegisterFomPageComponent implements OnInit {
               'homeName': this.data.homeName == 'other' ? this.data.homeOther : this.data.homeName,
               'relative': {
                   'relativeType': '',
-                  'title': '',
-                  'firstName': '',
-                  'lastName': '',
-                  'contractAddress': '',
-                  'relation': '',
-                  'tel': '',
-                  'organizationName': '',
-                  'organizationTel': ''
+                  'title': this.data.relative.title,
+                  'firstName': this.data.relative.firstName,
+                  'lastName': this.data.relative.lastName,
+                  'contractAddress': this.data.relative.contractAddress,
+                  'relation': this.data.relative.relation,
+                  'tel': this.data.relative.tel,
+                  'organizationName': this.data.relative.organizationName,
+                  'organizationTel': this.data.relative.organizationTel,
               },
               'information': {
-                  'gender': this.gender,
-                  'ethnicity': '',
-                  'religion': '',
-                  'status': '',
-                  'education': '',
-                  'career': '',
-                  'salary': '',
-                  'medicalPrivilege': '',
-                  'universalHealthInsuranceCardNo': '',
+                  'gender': this.data.information.gender,
+                  'ethnicity': this.data.information.ethnicity,
+                  'religion': this.data.information.religion,
+                  'status': this.data.information.status,
+                  'education': this.data.information.education,
+                  'career': this.data.information.career,
+                  'salary': this.data.information.salary,
+                  'medicalPrivilege': this.data.information.medicalPrivilege == 'บัตรประกันสุขภาพถ้วนหน้า เลขที่' ? this.data.information.medicalPrivilege + ' ' + this.data.information.universalHealthInsuranceCardNo : this.data.information.medicalPrivilege,
+                  'universalHealthInsuranceCardNo': this.data.information.universalHealthInsuranceCardNo,
                   'personality': [],
-                  'selfHelp': 'String',
+                  'selfHelp': this.data.information.selfHelp,
                   'issue': []
                   },
               'address': [
                   {
                       'oldAddress': {
-                          'no': 0,
-                          'moo': 0,
-                          'soi': '',
-                          'road': '',
-                          'subDistrict': '',
-                          'district': '',
-                          'province': '',
-                          'zipCode': ''
+                          'no': this.data.address.oldAddress.no,
+                          'moo': this.data.address.oldAddress.moo,
+                          'soi': this.data.address.oldAddress.soi,
+                          'road': this.data.address.oldAddress.road,
+                          'subDistrict': this.data.address.oldAddress.subDistrict,
+                          'district': this.data.address.oldAddress.district,
+                          'province': this.data.address.oldAddress.province,
+                          'zipCode': this.data.address.oldAddress.zipCode
                       }
                   },
                   {
                       'currentAddress': {
-                          'no': 0,
-                          'moo': 0,
-                          'soi': '',
-                          'road': '',
-                          'subDistrict': '',
-                          'district': '',
-                          'province': '',
-                          'zipCode': ''
+                          'no': this.data.address.currentAddress.no,
+                          'moo': this.data.address.currentAddress.moo,
+                          'soi': this.data.address.currentAddress.soi,
+                          'road': this.data.address.currentAddress.road,
+                          'subDistrict': this.data.address.currentAddress.subDistrict,
+                          'district': this.data.address.currentAddress.district,
+                          'province': this.data.address.currentAddress.province,
+                          'zipCode': this.data.address.currentAddress.zipCode
                       }
                   }
               ]
       };
-      
+
       console.log(this.dataForSubmit);
   };
 

@@ -63,7 +63,7 @@
             <div fxFlex>
                 <section class="example-section">
                     <label>เข้าพักเรือนนอน:</label>
-                    <md-radio-group [(ngModel)]="data.home">
+                    <md-radio-group [(ngModel)]="data.homeName">
                         <md-radio-button value="บ้านช้องนาง">บ้านช้องนาง</md-radio-button>&nbsp;&nbsp;
                         <md-radio-button value="บ้านชงโค">บ้านชงโค</md-radio-button>&nbsp;&nbsp;
                         <md-radio-button value="บ้านช่อชบา">บ้านช่อชบา</md-radio-button>&nbsp;&nbsp;
@@ -84,25 +84,25 @@
             <div fxFlex="1"></div>
             <div fxFlex>
                 <md-checkbox [(ngModel)]="isRelativeSent">ญาติโดย </md-checkbox>
-                <md-select [(ngModel)]="relativeTitle" placeholder="คำนำหน้า" style="margin-top: 9px;" [disabled]="!isRelativeSent">
+                <md-select [(ngModel)]="data.relative.title" placeholder="คำนำหน้า" style="margin-top: 9px;" [disabled]="!isRelativeSent">
                     <md-option *ngFor="let title of titles" [value]="title.code">
                         {{ title.desc }}
                     </md-option>
                 </md-select>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="ชื่อ" [(ngModel)]="relativeFirstName" [disabled]="!isRelativeSent">
+                    <input mdInput placeholder="ชื่อ" [(ngModel)]="data.relative.firstName" [disabled]="!isRelativeSent">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="นามสกุล" [(ngModel)]="relativeLastName" [disabled]="!isRelativeSent">
+                    <input mdInput placeholder="นามสกุล" [(ngModel)]="data.relative.lastName" [disabled]="!isRelativeSent">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input size="60" mdInput placeholder="ที่อยู่ที่สมารถติดต่อได้" [(ngModel)]="relativeAddress" [disabled]="!isRelativeSent">
+                    <input size="60" mdInput placeholder="ที่อยู่ที่สมารถติดต่อได้" [(ngModel)]="data.relative.contractAddress" [disabled]="!isRelativeSent">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="มีความเกี่ยวข้องเป็น" [(ngModel)]="relativeRelation" [disabled]="!isRelativeSent">
+                    <input mdInput placeholder="มีความเกี่ยวข้องเป็น" [(ngModel)]="data.relative.relation" [disabled]="!isRelativeSent">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="relativeTel" maxlength="10" [disabled]="!isRelativeSent">
+                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="data.relative.tel" maxlength="10" [disabled]="!isRelativeSent">
                 </md-input-container>&nbsp;&nbsp;
             </div>
             <div fxFlex="1"></div>
@@ -112,10 +112,10 @@
             <div fxFlex>
                 <md-checkbox [(ngModel)]="isOrganizationSent">หน่วยงาน/องค์กร </md-checkbox>
                 <md-input-container>
-                    <input size="50" mdInput placeholder="ชื่อหน่วยงาน" [(ngModel)]="organizationName" [disabled]="!isOrganizationSent">
+                    <input size="50" mdInput placeholder="ชื่อหน่วยงาน" [(ngModel)]="data.relative.organizationName" [disabled]="!isOrganizationSent">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="organizationTel" [disabled]="!isOrganizationSent">
+                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="data.relative.organizationTel" [disabled]="!isOrganizationSent">
                 </md-input-container>&nbsp;&nbsp;
             </div>
             <div fxFlex="1"></div>
@@ -126,7 +126,7 @@
             <div fxFlex="1"></div>
             <div fxFlex="13">เพศ</div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="gender">
+                <md-radio-group [(ngModel)]="data.information.gender">
                     <md-radio-button value="male">ชาย</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="female">หญิง</md-radio-button>&nbsp;&nbsp;
                 </md-radio-group>
@@ -138,13 +138,13 @@
             <div fxFlex="1"></div>
             <div fxFlex="13">เชื้อชาติ</div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="ethnicity">
+                <md-radio-group [(ngModel)]="data.information.ethnicity">
                     <md-radio-button value="ไทย">ไทย</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="จีน">จีน</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="other">อื่นๆ (ระบุ)</md-radio-button>&nbsp;&nbsp;
                 </md-radio-group>
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="" [(ngModel)]="ethnicityOther" [disabled]="ethnicity != 'other'">
+                    <input mdInput placeholder="" [(ngModel)]="data.information.ethnicityOther" [disabled]="data.information.ethnicity != 'other'">
                 </md-input-container>
             </div>
             <div fxFlex="1"></div>
@@ -154,14 +154,14 @@
             <div fxFlex="1"></div>
             <div fxFlex="13">ศาสนา</div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="religion">
+                <md-radio-group [(ngModel)]="data.information.religion">
                     <md-radio-button value="พุทธ">พุทธ</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="คลิสต์">คลิสต์</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="อิสลาม">อิสลาม</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="other">อื่นๆ (ระบุ)</md-radio-button>&nbsp;&nbsp;
                 </md-radio-group>
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="" [(ngModel)]="religionOther" [disabled]="religion != 'other'">
+                    <input mdInput placeholder="" [(ngModel)]="data.information.religionOther" [disabled]="data.information.religion != 'other'">
                 </md-input-container>
             </div>
             <div fxFlex="1"></div>
@@ -170,7 +170,7 @@
             <div fxFlex="1"></div>
             <div fxFlex="13">สถานภาพ</div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="status">
+                <md-radio-group [(ngModel)]="data.information.status">
                     <md-radio-button value="โสด">โสด</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="สมรส">สมรส</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="อย่าร้าง">อย่าร้าง</md-radio-button>&nbsp;&nbsp;
@@ -186,7 +186,7 @@
             <div fxFlex="1"></div>
             <div fxFlex="13">การศึกษา</div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="education">
+                <md-radio-group [(ngModel)]="data.information.education">
                     <md-radio-button value="ไม่ได้รับการศึกษา">ไม่ได้รับการศึกษา</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="ประถมศึกษาตอนต้น">ประถมศึกษาตอนต้น</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="ประถมศึกษาตอนปลาย">ประถมศึกษาตอนปลาย</md-radio-button>&nbsp;&nbsp;
@@ -207,7 +207,7 @@
             <div fxFlex="1"></div>
             <div fxFlex="13">อาชีพ</div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="career">
+                <md-radio-group [(ngModel)]="data.information.career">
                     <md-radio-button value="รับราชการ/พนักงานรัฐวิสาหกิจ">รับราชการ/พนักงานรัฐวิสาหกิจ</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="รับจ้าง/ลูกจ้าง">รับจ้าง/ลูกจ้าง</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="ธุรกิจ/ค้าขาย">ธุรกิจ/ค้าขาย</md-radio-button>&nbsp;&nbsp;
@@ -225,7 +225,7 @@
             <div fxFlex="1"></div>
             <div fxFlex="13">รายได้ต่อเดือน</div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="salary">
+                <md-radio-group [(ngModel)]="data.information.salary">
                     <md-radio-button value="ต่ำกว่า ๑,๕๐๐ บาท">ต่ำกว่า ๑,๕๐๐ บาท</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="๑,๕๐๐ - ๕,๐๐๐ บาท">๑,๕๐๐ - ๕,๐๐๐ บาท</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="๕,๐๐๑ - ๑๐,๐๐๐ บาท">๕,๐๐๑ - ๑๐,๐๐๐ บาท</md-radio-button>&nbsp;&nbsp;
@@ -241,12 +241,12 @@
             <div fxFlex="1"></div>
             <div fxFlex="13">สิทธิด้านการรักษาพยาบาล</div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="medicalPrivilege">
+                <md-radio-group [(ngModel)]="data.information.medicalPrivilege">
                     <md-radio-button value="ข้าราชการ/เบิกได้">ข้าราชการ/เบิกได้</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="ประกันสังคม">ประกันสังคม</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="บัตรประกันสุขภาพถ้วนหน้า เลขที่">บัตรประกันสุขภาพถ้วนหน้า เลขที่</md-radio-button>
                     <md-input-container style="margin-top: -10px;">
-                        <input mdInput placeholder="" [(ngModel)]="universalHealthInsuranceCardNo" [disabled]="medicalPrivilege != 'บัตรประกันสุขภาพถ้วนหน้า เลขที่'">
+                        <input mdInput placeholder="" [(ngModel)]="data.information.medicalPrivilege" [disabled]="data.information.medicalPrivilege != 'บัตรประกันสุขภาพถ้วนหน้า เลขที่'">
                     </md-input-container>&nbsp;&nbsp;
                     <md-radio-button value="ไม่มีข้อมูล">ไม่มีข้อมูล</md-radio-button>&nbsp;&nbsp;
                 </md-radio-group>
@@ -260,28 +260,28 @@
             <div fxFlex="13">ภูมิลำนำเดิม</div>
             <div fxFlex>
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="เลขที่" [(ngModel)]="oldAddress.no">
+                    <input mdInput placeholder="เลขที่" [(ngModel)]="data.address.oldAddress.no">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="หมู่ที่" [(ngModel)]="oldAddress.moo">
+                    <input mdInput placeholder="หมู่ที่" [(ngModel)]="data.address.oldAddress.moo">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="ตรอก/ซอย" [(ngModel)]="oldAddress.soi">
+                    <input mdInput placeholder="ตรอก/ซอย" [(ngModel)]="data.address.oldAddress.soi">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="ถนน" [(ngModel)]="oldAddress.road">
+                    <input mdInput placeholder="ถนน" [(ngModel)]="data.address.oldAddress.road">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="ตำบล" [(ngModel)]="oldAddress.subDistrict">
+                    <input mdInput placeholder="ตำบล" [(ngModel)]="data.address.oldAddress.subDistrict">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="อำเภอ" [(ngModel)]="oldAddress.district">
+                    <input mdInput placeholder="อำเภอ" [(ngModel)]="data.address.oldAddress.district">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="จังหวัด" [(ngModel)]="oldAddress.province">
+                    <input mdInput placeholder="จังหวัด" [(ngModel)]="data.address.oldAddress.province">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="รหัสไปรษณีย์" [(ngModel)]="oldAddress.zipcode">
+                    <input mdInput placeholder="รหัสไปรษณีย์" [(ngModel)]="data.address.oldAddress.zipCode">
                 </md-input-container>&nbsp;&nbsp;
             </div>
             <div fxFlex="1"></div>
@@ -300,28 +300,28 @@
             <div fxFlex="13"></div>
             <div fxFlex>
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="เลขที่" [(ngModel)]="currentAddress.no">
+                    <input mdInput placeholder="เลขที่" [(ngModel)]="data.address.currentAddress.no">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="หมู่ที่" [(ngModel)]="currentAddress.moo">
+                    <input mdInput placeholder="หมู่ที่" [(ngModel)]="data.address.currentAddress.moo">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="ตรอก/ซอย" [(ngModel)]="currentAddress.soi">
+                    <input mdInput placeholder="ตรอก/ซอย" [(ngModel)]="data.address.currentAddress.soi">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="ถนน" [(ngModel)]="currentAddress.road">
+                    <input mdInput placeholder="ถนน" [(ngModel)]="data.address.currentAddress.road">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="ตำบล" [(ngModel)]="currentAddress.subDistrict">
+                    <input mdInput placeholder="ตำบล" [(ngModel)]="data.address.currentAddress.subDistrict">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="อำเภอ" [(ngModel)]="currentAddress.district">
+                    <input mdInput placeholder="อำเภอ" [(ngModel)]="data.address.currentAddress.district">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="จังหวัด" [(ngModel)]="currentAddress.province">
+                    <input mdInput placeholder="จังหวัด" [(ngModel)]="data.address.currentAddress.province">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container style="margin-top: -10px;">
-                    <input mdInput placeholder="รหัสไปรษณีย์" [(ngModel)]="currentAddress.zipcode">
+                    <input mdInput placeholder="รหัสไปรษณีย์" [(ngModel)]="data.address.currentAddress.zipCode">
                 </md-input-container>&nbsp;&nbsp;
             </div>
             <div fxFlex="1"></div>
@@ -455,7 +455,7 @@
             <div fxFlex="1"></div>
             <div fxFlex="13"></div>
             <div fxFlex>
-                <md-radio-group [(ngModel)]="selfHelp">
+                <md-radio-group [(ngModel)]="data.information.selfHelp">
                     <md-radio-button value="ดีมาก">ดีมาก</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="ดี">ดี</md-radio-button>&nbsp;&nbsp;
                     <md-radio-button value="ปานกลาง">ปานกลาง</md-radio-button>&nbsp;&nbsp;
