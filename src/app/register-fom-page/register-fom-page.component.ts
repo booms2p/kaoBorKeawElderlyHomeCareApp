@@ -177,6 +177,12 @@ export class RegisterFomPageComponent implements OnInit {
               ]
       };
 
+    this.elderUserService.createUser(this.dataForSubmit).subscribe(
+        (result) => console.log(result),
+        (error) => console.log(error),
+        // () => 
+    );
+
       console.log(this.dataForSubmit);
   };
 
