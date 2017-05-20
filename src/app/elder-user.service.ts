@@ -16,7 +16,9 @@ export class ElderUserService {
     'Access-Control-Allow-Origin': '*',
     'Method':'GET'
   });
-  private elderApiUrl = 'http://192.168.1.106:3001/';  // URL to web api
+  private elderApiUrl = 'http://localhost:3001/';  // URL to web api
+  // private elderApiUrl = 'http://192.168.1.106:3001/';  // URL to web api
+
   public elderUser = [];
 
   private headers = new Headers({ 'Access-Control-Allow-Origin': '*','Content-Type': 'application/json','Method':'GET' });
