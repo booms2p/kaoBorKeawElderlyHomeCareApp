@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
-import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import { MdButtonModule, MdCheckboxModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {AccordionModule,InputTextModule,DataTableModule,SharedModule,ButtonModule,MenuItem,ConfirmDialogModule,ConfirmationService,GrowlModule,MessagesModule} from 'primeng/primeng';
+import { AccordionModule, InputTextModule, DataTableModule, SharedModule, ButtonModule, MenuItem, ConfirmDialogModule, ConfirmationService, GrowlModule, MessagesModule } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { LoadingComponent } from './loading/loading.component';
@@ -31,7 +31,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     BrowserAnimationsModule,
     HttpModule,
     MdButtonModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     MdCheckboxModule,
     FlexLayoutModule,
     AppRouteRoutingModule,
@@ -45,7 +45,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     GrowlModule,
     MessagesModule
   ],
-  providers: [ElderUserService,ConfirmationService],
+  providers: [ElderUserService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

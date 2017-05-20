@@ -1,6 +1,6 @@
 <br>
 
-<div class="container" style="margin-left: 30px; margin-right: 30px">
+<div>
     <!--<form>-->
     <md-card>
         <h3>ข้อมูลแรกรับผู้สูงอายุ</h3>
@@ -83,26 +83,29 @@
         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="content">
             <div fxFlex="1"></div>
             <div fxFlex>
-                <md-checkbox [(ngModel)]="isRelativeSent">ญาติโดย </md-checkbox>
-                <md-select [(ngModel)]="data.relative.title" placeholder="คำนำหน้า" style="margin-top: 9px;" [disabled]="!isRelativeSent">
+                <md-radio-group [(ngModel)]="data.relative.relativeType">
+                    <md-radio-button value="ญาติ">ญาติโดย</md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+                <!--<md-checkbox [(ngModel)]="isRelativeSent">ญาติโดย </md-checkbox>-->
+                <md-select [(ngModel)]="data.relative.title" placeholder="คำนำหน้า" style="margin-top: 9px;" [disabled]="data.relative.relativeType != 'ญาติ'">
                     <md-option *ngFor="let title of titles" [value]="title.code">
                         {{ title.desc }}
                     </md-option>
                 </md-select>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="ชื่อ" [(ngModel)]="data.relative.firstName" [disabled]="!isRelativeSent">
+                    <input mdInput placeholder="ชื่อ" [(ngModel)]="data.relative.firstName" [disabled]="data.relative.relativeType != 'ญาติ'">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="นามสกุล" [(ngModel)]="data.relative.lastName" [disabled]="!isRelativeSent">
+                    <input mdInput placeholder="นามสกุล" [(ngModel)]="data.relative.lastName" [disabled]="data.relative.relativeType != 'ญาติ'">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input size="60" mdInput placeholder="ที่อยู่ที่สมารถติดต่อได้" [(ngModel)]="data.relative.contractAddress" [disabled]="!isRelativeSent">
+                    <input size="60" mdInput placeholder="ที่อยู่ที่สมารถติดต่อได้" [(ngModel)]="data.relative.contractAddress" [disabled]="data.relative.relativeType != 'ญาติ'">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="มีความเกี่ยวข้องเป็น" [(ngModel)]="data.relative.relation" [disabled]="!isRelativeSent">
+                    <input mdInput placeholder="มีความเกี่ยวข้องเป็น" [(ngModel)]="data.relative.relation" [disabled]="data.relative.relativeType != 'ญาติ'">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="data.relative.tel" maxlength="10" [disabled]="!isRelativeSent">
+                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="data.relative.tel" maxlength="10" [disabled]="data.relative.relativeType != 'ญาติ'">
                 </md-input-container>&nbsp;&nbsp;
             </div>
             <div fxFlex="1"></div>
@@ -110,12 +113,15 @@
         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="content">
             <div fxFlex="1"></div>
             <div fxFlex>
-                <md-checkbox [(ngModel)]="isOrganizationSent">หน่วยงาน/องค์กร </md-checkbox>
+                <md-radio-group [(ngModel)]="data.relative.relativeType">
+                    <md-radio-button value="หน่วยงาน/องค์กร">หน่วยงาน/องค์กร </md-radio-button>&nbsp;&nbsp;
+                </md-radio-group>
+                <!--<md-checkbox [(ngModel)]="isOrganizationSent">หน่วยงาน/องค์กร </md-checkbox>-->
                 <md-input-container>
-                    <input size="50" mdInput placeholder="ชื่อหน่วยงาน" [(ngModel)]="data.relative.organizationName" [disabled]="!isOrganizationSent">
+                    <input size="50" mdInput placeholder="ชื่อหน่วยงาน" [(ngModel)]="data.relative.organizationName" [disabled]="data.relative.relativeType != 'หน่วยงาน/องค์กร'">
                 </md-input-container>&nbsp;&nbsp;
                 <md-input-container>
-                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="data.relative.organizationTel" [disabled]="!isOrganizationSent">
+                    <input mdInput placeholder="เบอร์โทรศัพท์" [(ngModel)]="data.relative.organizationTel" [disabled]="data.relative.relativeType != 'หน่วยงาน/องค์กร'">
                 </md-input-container>&nbsp;&nbsp;
             </div>
             <div fxFlex="1"></div>

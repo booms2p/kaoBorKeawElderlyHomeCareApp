@@ -83,3 +83,8 @@
     color: #ff0084;
     border-radius: 50%;
 }
+
+.col-button {
+    text-align: center;
+    width: 5%;
+}

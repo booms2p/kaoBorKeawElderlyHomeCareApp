@@ -22,13 +22,13 @@ export class HomePageComponent implements OnInit {
 
   setFullName(): void {
     if (this.elderUserDatas.length > 0) {
-
       this.elderUserDatas.forEach(function (userItem, userIndex) {
         userItem.fullName = userItem.title + ' ' + userItem.firstName + '  ' + userItem.lastName;
       });
-
-      this.isLoaded = true;
+    } else {
+      this.elderUserDatas = [];
     }
+    this.isLoaded = true;
     console.log(this.elderUserDatas);
   }
 
@@ -48,9 +48,9 @@ export class HomePageComponent implements OnInit {
       (data) => console.log(data),
       (error) => console.log(error),
       () => {
-              this.showSuccessMsg(userData.fullName); 
-              this.queryUser();
-            }
+        this.showSuccessMsg(userData.fullName);
+        this.queryUser();
+      }
     )
   }
 
@@ -63,17 +63,17 @@ export class HomePageComponent implements OnInit {
     )
   }
 
-showSuccessMsg(msg) {
+  showSuccessMsg(msg) {
     this.msgs = [];
-    this.msgs.push({severity:'success', summary:'ทำรายการสำเร็จ', detail:'ลบข้อมูลผู้สูงอายุ ' + msg + ' เรียบร้อย'});
+    this.msgs.push({ severity: 'success', summary: 'ทำรายการสำเร็จ', detail: 'ลบข้อมูลผู้สูงอายุ ' + msg + ' เรียบร้อย' });
     // setTimeout(() => {
     //   this.msgs = [];
     // }, 1000);
-}
+  }
 
-hide() {
+  hide() {
     this.msgs = [];
-}
+  }
 
   ngOnInit() {
     this.queryUser();
