@@ -35,6 +35,21 @@ export class ElderUserService {
     return this._http.delete(this.elderApiUrl + 'elderUser/' + idNumber)
                .map( (response) => response.json() );
   }
+
+  findUserByIDNumber(idNumber) {
+    return this._http.get(this.elderApiUrl + 'elderUser/' + idNumber)
+               .map( (response) => response.json() );
+  }
+
+  createUser(data) {
+    return this._http.post(this.elderApiUrl + 'add-elder-user', data)
+               .map( (response) => response.json() );
+  }
+
+  updateUser(data) {
+    return this._http.put(this.elderApiUrl + 'update_elder_user/' + data.idNumbber, data)
+               .map( (response) => response.json() );
+  }
   
 
   private handleError(error: any): Promise<any> {
